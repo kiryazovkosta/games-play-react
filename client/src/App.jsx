@@ -1,9 +1,11 @@
+import Header from "./components/header/Header"
+
 function App() {
   return (
-    <>
-        <h1>Hello from GamesPlay</h1>
-    </>
-  )
+    <div id="box">
+        <Header />
+    </div>
+  );
 }
 
 export default App
