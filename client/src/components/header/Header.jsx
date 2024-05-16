@@ -1,21 +1,23 @@
 import { Link } from 'react-router-dom';
 
+import { Paths } from '../../utils/Paths';
+
 const Header = () => {
     return (
         <header>
-            <h1><Link className="home" to="/">GamesPlay</Link></h1>
+            <h1><Link className="home" to={Paths.root}>GamesPlay</Link></h1>
             <nav>
-                <Link to="/games">All games</Link>
+                <Link to={Paths.games}>All games</Link>
                 {/* <!-- Logged-in users --> */}
                 <div id="user">
-                    <Link to="/games/create">Create Game</Link>
-                    <Link to="/logout">Logout</Link>
+                    <Link to={Paths.gameCreate}>Create Game</Link>
+                    <Link to={Paths.logout}>Logout</Link>
                 </div>
 
                 {/* <!-- Guest users --> */}
                 <div id="guest">
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <Link to={Paths.login}>Login</Link>
+                    <Link to={Paths.register}>Register</Link>
                 </div>
             </nav>
         </header>

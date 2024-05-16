@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { Paths } from '../../utils/Paths';
+
 export default function Login() {
     return (
         <section id="login-page" className="auth">
@@ -15,7 +17,7 @@ export default function Login() {
                 <input type="password" id="login-password" name="password" />
                 <input type="submit" className="btn submit" value="Login" />
                 <p className="field">
-                    <span>If you don't have profile click <Link to="/register">here</Link></span>
+                    <span>If you don't have profile click <Link to={Paths.register}>here</Link></span>
                 </p>
             </div>
         </form>
