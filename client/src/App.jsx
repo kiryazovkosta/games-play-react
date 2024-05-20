@@ -8,6 +8,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 
 import { Paths } from './utils/Paths';
+import GameDetails from './components/game-details/GameDetails';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path={Paths.gameCreate} element={<GameCreate />} />
                 <Route path={Paths.login} element={<Login />} />
                 <Route path={Paths.register} element={<Register />} />
+                <Route path="/games/:gameId" element={<GameDetails />} />
             </Routes>
         </div>
     );

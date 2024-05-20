@@ -14,7 +14,7 @@ export default function GameListItem({
                 <img src={imageUrl} />
                 <h6>{category}</h6>
                 <h2>{title}</h2>
-                <Link href="#" className="details-button">Details</Link>
+                <Link to={`${Paths.games}/${_id}`} className="details-button">Details</Link>
             </div>
         </div>
     )
