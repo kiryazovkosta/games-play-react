@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import * as gameService from '../../services/gameService'
+import * as commentService from '../../services/commentService';
 
 const GameDetails = () => {
     const [game, setGame] = useState({});
@@ -10,8 +11,23 @@ const GameDetails = () => {
 
     useEffect(() => {
         gameService.getOne(gameId)
+            //.then(setGame);
             .then(result => setGame(result));
     }, [gameId]);
+
+    const addCommentHandler = async (ev) => {
+        ev.preventDefault();
+
+        const formData = new FormData(ev.currentTarget);
+
+        const createdComment = await commentService.create(
+            gameId, 
+            formData.get('username'),
+            formData.get('comment')
+        );
+
+        console.log(createdComment);
+    }
 
     return (
         <section id="game-details">
@@ -29,21 +45,20 @@ const GameDetails = () => {
                     {game.summary}
                 </p>
 
-                {/* <!-- Bonus ( for Guests and Users ) --> */}
-                {/* <div className="details-comments"> */}
-                    {/* <h2>Comments:</h2> */}
-                    {/* <ul> */}
-                        {/* <!-- list all comments for current game (If any) --> */}
-                        {/* <li className="comment"> */}
-                            {/* <p>Content: I rate this one quite highly.</p> */}
-                        {/* </li> */}
-                        {/* <li className="comment"> */}
-                            {/* <p>Content: The best game.</p> */}
-                        {/* </li> */}
-                    {/* </ul> */}
-                    {/* <!-- Display paragraph: If there are no games in the database --> */}
-                    {/* <p className="no-comment">No comments.</p> */}
-                {/* </div> */}
+
+                <div className="details-comments">
+                    <h2>Comments:</h2>
+                    <ul>
+                        <li className="comment">
+                            <p>Content: I rate this one quite highly.</p>
+                        </li>
+                        <li className="comment">
+                            <p>Content: The best game.</p>
+                        </li>
+                    </ul>
+
+                    <p className="no-comment">No comments.</p>
+                </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
                 {/* <div className="buttons">
@@ -54,13 +69,14 @@ const GameDetails = () => {
 
             {/* <!-- Bonus --> */}
             {/* <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
-            {/* <article className="create-comment">
+            <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
+                <form className="form" onSubmit={addCommentHandler}>
+                    <input type="text" name="username" placeholder="Enter username" />
                     <textarea name="comment" placeholder="Comment......"></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
-            </article> */}
+            </article>
 
         </section>
     )
