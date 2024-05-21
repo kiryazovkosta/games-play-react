@@ -13,7 +13,7 @@ const GameDetails = () => {
         gameService.getOne(gameId)
             .then(result => setGame(result));
 
-        commentService.getAll()
+        commentService.getAll(gameId)
             .then(setComments);
     }, [gameId]);
 
